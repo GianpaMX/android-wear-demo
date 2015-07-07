@@ -59,4 +59,16 @@ public class ConversationMessageList extends LinkedList<ConversationMessage> {
     public void addLast(ConversationMessage object) {
         add(size(), object);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(ConversationMessage message : this) {
+            stringBuilder.append(message.sender);
+            stringBuilder.append(" ");
+            stringBuilder.append(message.text);
+            stringBuilder.append(System.getProperty("line.separator"));
+        }
+        return stringBuilder.toString();
+    }
 }

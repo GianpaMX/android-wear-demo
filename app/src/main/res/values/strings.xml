@@ -8,6 +8,7 @@
     <string name="fragment_conversation_sender_text_hint">Type your name here</string>
     <string name="fragment_conversation_sender_default_text">Sender</string>
     <string name="notification_reply_title">Reply</string>
+    <string name="notification_full_conversation_page_title">Conversation</string>
 
     <string-array name="notification_reply_choices">
         <item>Yes</item>

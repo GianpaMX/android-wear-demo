@@ -1,5 +1,6 @@
 package mx.softux.androidweardemo;
 
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,12 @@ public class AndroidWearDemoGcmListenerService extends GcmListenerService {
         Intent viewIntent = new Intent(this, ConversationActivity.class);
         PendingIntent viewPendingIntent = PendingIntent.getActivity(this, 0, viewIntent, 0);
 
+        NotificationCompat.BigTextStyle secondPageStyle = new NotificationCompat.BigTextStyle();
+        secondPageStyle.setBigContentTitle(getString(R.string.notification_full_conversation_page_title)).bigText(Api.getService().getMessages().toString());
+
+        Notification secondPageNotification = new NotificationCompat.Builder(this)
+                .setStyle(secondPageStyle)
+                .build();
 
         String replyLabel = getResources().getString(R.string.notification_reply_title);
         String[] replyChoices = getResources().getStringArray(R.array.notification_reply_choices);
@@ -45,7 +52,7 @@ public class AndroidWearDemoGcmListenerService extends GcmListenerService {
                 .setChoices(replyChoices)
                 .build();
 
-        NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.ic_replay_black_24dp,getString(R.string.notification_reply_title), viewPendingIntent)
+        NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.ic_replay_black_24dp, getString(R.string.notification_reply_title), viewPendingIntent)
                 .addRemoteInput(remoteInput)
                 .build();
 
@@ -54,7 +61,10 @@ public class AndroidWearDemoGcmListenerService extends GcmListenerService {
                 .setContentTitle("New message")
                 .setContentText(message)
                 .setContentIntent(viewPendingIntent)
-                .extend(new WearableExtender().addAction(action));
+                .extend(new WearableExtender()
+                                .addPage(secondPageNotification)
+                                .addAction(action)
+                );
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
