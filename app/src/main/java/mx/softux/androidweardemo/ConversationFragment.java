@@ -55,7 +55,6 @@ public class ConversationFragment extends ListFragment implements LoaderManager.
                 service.postMessage(new ConversationMessage(senderEditText.getText().toString(), messageEditText.getText().toString()), new Callback<ConversationMessage>() {
                     @Override
                     public void success(ConversationMessage message, Response response) {
-                        EventBus.getInstance().post(message);
                         messageEditText.setText("");
                     }
 
