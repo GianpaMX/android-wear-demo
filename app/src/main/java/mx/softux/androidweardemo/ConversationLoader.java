@@ -3,6 +3,8 @@ package mx.softux.androidweardemo;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
+import com.squareup.otto.Subscribe;
+
 import java.util.List;
 
 /**
@@ -40,11 +42,18 @@ public class ConversationLoader extends AsyncTaskLoader<List<ConversationMessage
         oldMessages = null;
     }
 
+    @Subscribe
+    public void conversationMessageAvailable(ConversationMessage newMessage) {
+        forceLoad();
+    }
+
     @Override
     protected void onStartLoading() {
         if (messages != null) {
             deliverResult(messages);
         }
+
+        EventBus.getInstance().register(this);
 
         if (takeContentChanged() || messages == null) {
             forceLoad();
@@ -54,5 +63,6 @@ public class ConversationLoader extends AsyncTaskLoader<List<ConversationMessage
     @Override
     protected void onReset() {
         messages = null;
+        EventBus.getInstance().unregister(this);
     }
 }

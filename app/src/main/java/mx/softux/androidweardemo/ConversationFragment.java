@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -43,23 +44,24 @@ public class ConversationFragment extends ListFragment implements LoaderManager.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_conversation, null);
 
-        final EditText sender = (EditText) view.findViewById(R.id.sender_edit_text);
-        final EditText message = (EditText) view.findViewById(R.id.message_edit_text);
+        final EditText senderEditText = (EditText) view.findViewById(R.id.sender_edit_text);
+        final EditText messageEditText = (EditText) view.findViewById(R.id.message_edit_text);
 
         Button sendButton = (Button) view.findViewById(R.id.send_button);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AndroidWearDemoService service = Api.getService();
-                service.postMessage(new ConversationMessage(sender.getText().toString(), message.getText().toString()), new Callback<ConversationMessage>() {
+                service.postMessage(new ConversationMessage(senderEditText.getText().toString(), messageEditText.getText().toString()), new Callback<ConversationMessage>() {
                     @Override
                     public void success(ConversationMessage message, Response response) {
-
+                        EventBus.getInstance().post(message);
+                        messageEditText.setText("");
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
