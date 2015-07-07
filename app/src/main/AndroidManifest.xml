@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".RegistrationIntentService"
+            android:exported="false" />
+
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
