@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Android Wear Demo</string>
+
+    <string name="activity_conversation_title">Conversation</string>
 </resources>
