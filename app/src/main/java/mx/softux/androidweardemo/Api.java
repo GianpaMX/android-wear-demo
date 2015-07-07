@@ -19,7 +19,7 @@ public class Api {
                     .create();
 
             RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint("http://192.168.56.1:1337")
+                    .setEndpoint("http://192.168.1.63:1337")
                     .setConverter(new GsonConverter(gson))
                     .build();
 

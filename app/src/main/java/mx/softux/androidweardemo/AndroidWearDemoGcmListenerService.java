@@ -13,8 +13,11 @@ public class AndroidWearDemoGcmListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
+        String sender = data.getString("sender");
         String message = data.getString("message");
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
+
+        EventBus.getInstance().post(new ConversationMessage(sender, message));
     }
 }
