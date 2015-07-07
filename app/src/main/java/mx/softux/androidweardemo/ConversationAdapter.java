@@ -7,19 +7,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by juan on 7/7/15.
  */
 public class ConversationAdapter extends BaseAdapter {
-    private List<ConversationMessage> messages;
+    private ConversationMessageList messages;
     private Context context;
 
     public ConversationAdapter(Context context) {
         this.context = context;
-        messages = new LinkedList<ConversationMessage>();
+        messages = new ConversationMessageList();
     }
 
     @Override
@@ -51,25 +50,28 @@ public class ConversationAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
+        viewHolder.senderText.setText(messages.get(position).sender);
         viewHolder.messageText.setText(messages.get(position).text);
 
         return view;
     }
 
-    public void addMessages(List<ConversationMessage> messages) {
-        messages.addAll(messages);
+    public void addMessages(List<ConversationMessage> newMessages) {
+        messages.addAll(newMessages);
         notifyDataSetChanged();
     }
 
     public void removeMessages() {
-        messages = new LinkedList<ConversationMessage>();
+        messages.clear();
         notifyDataSetChanged();
     }
 
     private class ViewHolder {
+        public TextView senderText;
         public TextView messageText;
 
         public ViewHolder(View view) {
+            senderText = (TextView) view.findViewById(R.id.sender_text);
             messageText = (TextView) view.findViewById(R.id.message_text);
         }
     }

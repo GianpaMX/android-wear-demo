@@ -8,6 +8,18 @@ import java.util.Date;
 public class ConversationMessage {
     public Integer id;
     public String text;
-    public Date date;
-    public Integer senderId;
+    public String sender;
+    public Date createdAt;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ConversationMessage))
+            return false;
+        if (obj == this)
+            return true;
+
+        ConversationMessage that = (ConversationMessage) obj;
+
+        return this.id == null ? this.id == that.id : id.equals(that.id);
+    }
 }
