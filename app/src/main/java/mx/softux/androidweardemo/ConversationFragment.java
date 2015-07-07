@@ -8,8 +8,14 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by juan on 7/7/15.
@@ -36,6 +42,29 @@ public class ConversationFragment extends ListFragment implements LoaderManager.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_conversation, null);
+
+        final EditText sender = (EditText) view.findViewById(R.id.sender_edit_text);
+        final EditText message = (EditText) view.findViewById(R.id.message_edit_text);
+
+        Button sendButton = (Button) view.findViewById(R.id.send_button);
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AndroidWearDemoService service = Api.getService();
+                service.postMessage(new ConversationMessage(sender.getText().toString(), message.getText().toString()), new Callback<ConversationMessage>() {
+                    @Override
+                    public void success(ConversationMessage message, Response response) {
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+            }
+        });
+
         return view;
     }
 

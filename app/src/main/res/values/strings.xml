@@ -5,4 +5,6 @@
     <string name="fragment_conversation_send_button_text">Send</string>
     <string name="fragment_conversation_empty_conversation_message">Empty conversation</string>
     <string name="fragment_conversation_message_text_hint">Type a message</string>
+    <string name="fragment_conversation_sender_text_hint">Type your name here</string>
+    <string name="fragment_conversation_sender_default_text">Sender</string>
 </resources>

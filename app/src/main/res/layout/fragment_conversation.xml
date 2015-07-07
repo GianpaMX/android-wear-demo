@@ -2,6 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/sender_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/fragment_conversation_sender_text_hint"
+        android:text="@string/fragment_conversation_sender_default_text"/>
 
     <ListView
         android:id="@id/android:list"
@@ -12,7 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/sender_edit_text"/>
 
     <TextView
         android:id="@id/android:empty"
@@ -23,7 +34,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/sender_edit_text"
         android:text="@string/fragment_conversation_empty_conversation_message" />
 
     <EditText

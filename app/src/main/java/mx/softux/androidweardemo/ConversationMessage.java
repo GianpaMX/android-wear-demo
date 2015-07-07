@@ -11,6 +11,11 @@ public class ConversationMessage {
     public String sender;
     public Date createdAt;
 
+    public ConversationMessage(String sender, String text) {
+        this.sender = sender;
+        this.text = text;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof ConversationMessage))
