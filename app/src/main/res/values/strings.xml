@@ -7,4 +7,11 @@
     <string name="fragment_conversation_message_text_hint">Type a message</string>
     <string name="fragment_conversation_sender_text_hint">Type your name here</string>
     <string name="fragment_conversation_sender_default_text">Sender</string>
+    <string name="notification_reply_title">Reply</string>
+
+    <string-array name="notification_reply_choices">
+        <item>Yes</item>
+        <item>No</item>
+        <item>Maybe</item>
+    </string-array>
 </resources>

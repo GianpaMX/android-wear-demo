@@ -24,8 +24,13 @@ import retrofit.client.Response;
 public class ConversationFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<ConversationMessage>> {
     ConversationAdapter conversationAdapter;
 
-    public static ConversationFragment newInstance() {
+    public static ConversationFragment newInstance(CharSequence messageText) {
         ConversationFragment fragment = new ConversationFragment();
+        if (messageText != null) {
+            Bundle arguments = new Bundle();
+            arguments.putCharSequence(AndroidWearDemoGcmListenerService.EXTRA_VOICE_REPLY, messageText);
+            fragment.setArguments(arguments);
+        }
         return fragment;
     }
 
@@ -65,6 +70,11 @@ public class ConversationFragment extends ListFragment implements LoaderManager.
                 });
             }
         });
+
+        if(savedInstanceState == null && getArguments() != null) {
+            messageEditText.setText(getArguments().getCharSequence(AndroidWearDemoGcmListenerService.EXTRA_VOICE_REPLY));
+            sendButton.callOnClick();
+        }
 
         return view;
     }
