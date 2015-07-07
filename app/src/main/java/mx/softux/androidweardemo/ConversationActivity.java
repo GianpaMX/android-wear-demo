@@ -15,5 +15,10 @@ public class ConversationActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(savedInstanceState == null) {
+            ConversationFragment conversationFragment = ConversationFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().add(R.id.conversation_fragment, conversationFragment).commit();
+        }
     }
 }

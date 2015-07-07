@@ -2,4 +2,7 @@
     <string name="app_name">Android Wear Demo</string>
 
     <string name="activity_conversation_title">Conversation</string>
+    <string name="fragment_conversation_send_button_text">Send</string>
+    <string name="fragment_conversation_empty_conversation_message">Empty conversation</string>
+    <string name="fragment_conversation_message_text_hint">Type a message</string>
 </resources>
